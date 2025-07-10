@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class MainNavigationState extends ChangeNotifier {
-  // ignore: prefer_final_fields
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
 
