@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:warmly/pages/home/components/audio_recorder.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -20,7 +22,7 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        actions: [],
+        actions: [AudioRecorderButton()],
       ),
     );
   }
