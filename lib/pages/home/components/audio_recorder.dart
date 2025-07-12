@@ -19,16 +19,30 @@ class _AudioRecorderButtonState extends State<AudioRecorderButton> {
   }
 
   Future<void> _toggleRecording() async {
-    if (await _record.hasPermission()) {
+    final hasPermission = await _record.hasPermission();
+    print("Microphone permission: $hasPermission");
+
+    if (hasPermission) {
       if (_isRecording) {
         final path = await _record.stop();
+        print("Stopped recording");
+        print("Saved path: $path");
+
         setState(() => _isRecording = false);
-        print('Recording saved to: $path');
       } else {
         final path = await _getFilePath();
-        await _record.start(RecordConfig(), path: path);
-        setState(() => _isRecording = true);
+
+        try {
+          await _record.start(RecordConfig(), path: path);
+          print("Started recording at: $path");
+
+          setState(() => _isRecording = true);
+        } catch (e) {
+          print("Error starting recording: $e");
+        }
       }
+    } else {
+      print("No microphone permissions.");
     }
   }
 
